@@ -91,4 +91,3 @@ for(var i = 0 ; i < doc.layers.length; i++) {
     doc.layers[1].visible = false;
 }
 showAll(doc);
-saveWebP("compressionLossy", 75, true, true, true, false, " - all");
