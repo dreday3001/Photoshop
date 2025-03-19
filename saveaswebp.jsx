@@ -1,3 +1,13 @@
+var doc = app.activeDocument;
+var layerName = "";
+var Testmobi = "mobi";
+var Testdesk = "desk";
+var Testpadding = "PADDING";
+var Testvert = "VERT";
+var TestMOB = "MOB";
+var TestDESK = "DESK";
+
+
 function saveWebP(compType, compValue, xmpData, exifData, psData, asCopy, fileName) {
  
     var versionNumber = app.version.split(".");
@@ -80,51 +90,36 @@ function showAll(document) {
     }
 }
 
-var doc = app.activeDocument;
-var layerName = "";
-var Testmobi = "mobi";
-var Testdesk = "desk";
-var Testpadding = "PADDING";
-var Testvert = "VERT";
-var testMOB = "MOB";
-var testDESK = "DESK";
+function render(layerNumber, layerName) {
+    doc.layers[layerNumber].visible = true;
+    saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+    doc.layers[layerNumber].visible = false;
+}
 
 for(var i = 0 ; i < doc.layers.length; i++) {
     hideAll(doc);
     layerName = doc.layers[i].name;
     if (layerName.indexOf(Testmobi) !== -1 ) {
         if (layerName.indexOf(Testpadding) === -1) {
-            doc.layers[i].visible = true;
-            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
-            doc.layers[1].visible = false;
+            render(i, layerName)
         }
         if (layerName.indexOf(Testvert) === -1) {
-            doc.layers[i].visible = true;
-            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
-            doc.layers[1].visible = false;
+            render(i, layerName)
         }
     }
     if (layerName.indexOf(Testdesk) !== -1 ) {
         if (layerName.indexOf(Testpadding) === -1) {
-            doc.layers[i].visible = true;
-            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
-            doc.layers[1].visible = false;
+            render(i, layerName)
         }
         if (layerName.indexOf(Testvert) === -1) {
-            doc.layers[i].visible = true;
-            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
-            doc.layers[1].visible = false;
+            render(i, layerName)
         }
     }
-    if (layerName.indexOf(testDESK) !== -1){
-        doc.layers[i].visible = true;
-        saveWebP("compressionLossy", 75, true, true, true, false, layerName);
-        doc.layers[1].visible = false;
+    if (layerName.indexOf(TestDESK) !== -1){
+        render(i, layerName)
     }
-    if (layerName.indexOf(testMOB) !== -1){
-        doc.layers[i].visible = true;
-        saveWebP("compressionLossy", 75, true, true, true, false, layerName);
-        doc.layers[1].visible = false;
+    if (layerName.indexOf(TestMOB) !== -1){
+        render(i, layerName)
     }
 }
 showAll(doc);
