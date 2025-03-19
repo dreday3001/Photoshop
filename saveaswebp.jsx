@@ -82,12 +82,50 @@ function showAll(document) {
 
 var doc = app.activeDocument;
 var layerName = "";
+var Testmobi = "mobi";
+var Testdesk = "desk";
+var Testpadding = "PADDING";
+var Testvert = "VERT";
+var testMOB = "MOB";
+var testDESK = "DESK";
 
 for(var i = 0 ; i < doc.layers.length; i++) {
     hideAll(doc);
-    doc.layers[i].visible = true;
     layerName = doc.layers[i].name;
-    saveWebP("compressionLossy", 75, true, true, true, false, layerName + " " + i);
-    doc.layers[1].visible = false;
+    if (layerName.indexOf(Testmobi) !== -1 ) {
+        if (layerName.indexOf(Testpadding) === -1) {
+            doc.layers[i].visible = true;
+            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+            doc.layers[1].visible = false;
+        }
+        if (layerName.indexOf(Testvert) === -1) {
+            doc.layers[i].visible = true;
+            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+            doc.layers[1].visible = false;
+        }
+    }
+    if (layerName.indexOf(Testdesk) !== -1 ) {
+        if (layerName.indexOf(Testpadding) === -1) {
+            doc.layers[i].visible = true;
+            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+            doc.layers[1].visible = false;
+        }
+        if (layerName.indexOf(Testvert) === -1) {
+            doc.layers[i].visible = true;
+            saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+            doc.layers[1].visible = false;
+        }
+    }
+    if (layerName.indexOf(testDESK) !== -1){
+        doc.layers[i].visible = true;
+        saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+        doc.layers[1].visible = false;
+    }
+    if (layerName.indexOf(testMOB) !== -1){
+        doc.layers[i].visible = true;
+        saveWebP("compressionLossy", 75, true, true, true, false, layerName);
+        doc.layers[1].visible = false;
+    }
 }
 showAll(doc);
+saveWebP("compressionLossy", 75, true, true, true, false, " - all");
